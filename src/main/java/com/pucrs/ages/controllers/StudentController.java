@@ -17,23 +17,16 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class StudentController {
 
     StudentService studentService;
 
     //CREATE
-    @RequestMapping(path = "/create", method = GET)
-    public String createStudent() throws ParseException {
-        studentService.createStudent(
-            new StudentEntity(
-                0L,
-                new SimpleDateFormat("dd-MM-yyyy").parse("14-05-1996"),
-                "Cley",
-                "cleyson.oliveira@logiclabsoftwares.com",
-                "645.790.620-60"
-            )
-        );
-        return "HELLO WORLD DO SUMMER CAMP";
+    @RequestMapping(path = "/create", method = POST)
+    public ResponseEntity createStudent(@RequestBody StudentEntity newStudent) throws ParseException {
+        StudentEntity studentEntity = studentService.createStudent(newStudent);
+        return ResponseEntity.ok(studentEntity.getId());
     }
 
     //    READ

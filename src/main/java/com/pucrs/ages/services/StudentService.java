@@ -11,8 +11,8 @@ public class StudentService {
 
     StudentRepository studentRepository;
 
-    public void createStudent(StudentEntity student) {
-        studentRepository.save(student);
+    public StudentEntity createStudent(StudentEntity student) {
+        return studentRepository.save(student);
     }
 
 
